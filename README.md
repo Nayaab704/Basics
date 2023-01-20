@@ -1,2 +1,3 @@
-CS5704 SE Basics Workshop
-Hello!
+# CS5704 SE Basics Workshop
+Nayaab Azim 
+Hello GitHub!
