@@ -1,0 +1,121 @@
+1. return type : int
+   method name : cmd_worktree
+   parameters  : ac, av, prefix
+
+2. latest version of the Release note : 1.5.2
+
+3. The output is one of the blob (specifically, 4th last line form the bottom)
+   tail -x gives the last x lines from the bottom 
+   head -x gives first x lines from the top
+   '|' combines the commands and runs sequentially.
+
+5. Last four lines after the commiter line is the commit message here 
+   l10n: de.po: Update German translation for Git v2.31.0
+
+   Reviewed-by: Ralf Thielow <ralf.thielow@gmail.com>
+Reviewed-by: Phillip Szelat <phillip.szelat@gmail.com>
+Signed-off-by: Matthias Rüster <matthias.ruester@gmail.com>
+
+6. Command :PAGER='head -n 80' git log --graph --grep="refactored" # You can edit this for Exercise 6
+
+Output: 
+* commit 9aebc4708ad21cc18f6d5c6909381abb0fe01023
+  Author: Ævar Arnfjörð Bjarmason <avarab@gmail.com>
+  Date:   Sat Jan 23 14:00:44 2021 +0100
+  
+      upload-pack tests: avoid a non-zero "grep" exit status
+      
+      Continue changing a test that 763b47bafa (t5703: stop losing return
+      codes of git commands, 2019-11-27) already refactored.
+      
+      This was originally added as part of a series to add support for
+      running under bash's "set -o pipefail", under that mode this test will
+      fail because sometimes there's no commits in the "objs" output.
+      
+      It's easier to fix that than exempt these tests under a hypothetical
+      "set -o pipefail" test mode. It looks like we probably won't have
+      that, but once we've dug this code up let's refactor it[2] so we don't
+      hide a potential pipe failure.
+      
+      1. https://lore.kernel.org/git/xmqqzh18o8o6.fsf@gitster.c.googlers.com/
+      
+      Signed-off-by: Ævar Arnfjörð Bjarmason <avarab@gmail.com>
+      Signed-off-by: Junio C Hamano <gitster@pobox.com>
+  
+* commit e2f89586fa6d22bfb176e2f679584464fa1a282d
+  Author: Philippe Blain <levraiphilippeblain@gmail.com>
+  Date:   Thu Oct 29 12:48:29 2020 +0000
+  
+      log, show: add tests for messages containing CRLF
+      
+      A previous commit adjusted the code in ref-filter.c so that messages
+      containing CRLF are now correctly parsed and displayed.
+      
+      Add tests to also check that `git log` and `git show` correctly handle
+      such messages, to prevent futur regressions if these commands are
+      refactored to use the ref-filter API.
+      
+      Signed-off-by: Philippe Blain <levraiphilippeblain@gmail.com>
+      Signed-off-by: Junio C Hamano <gitster@pobox.com>
+  
+* commit cea69151a4d4c0861a6dd5006267141b04ebbadb
+  Author: Jeff King <peff@peff.net>
+  Date:   Wed Oct 7 14:19:23 2020 -0400
+  
+      index-pack: restore "resolving deltas" progress meter
+      
+      Commit f08cbf60fe (index-pack: make quantum of work smaller, 2020-09-08)
+      refactored the main loop in threaded_second_pass(), but also deleted the
+      call to display_progress() at the top of the loop. This means that users
+      typically see no progress at all during the delta resolution phase (and
+      for large repositories, Git appears to hang).
+      
+      This looks like an accident that was unrelated to the intended change of
+      that commit, since we continue to update nr_resolved_deltas in
+      resolve_delta(). Let's restore the call to get that progress back.
+      
+      We'll also add a test that confirms we generate the expected progress.
+      This isn't perfect, as it wouldn't catch a bug where progress was
+      delayed to the end. That was probably possible to trigger when receiving
+      a thin pack, because we'd eventually call display_progress() from
+      fix_unresolved_deltas(), but only once after doing all the work.
+      However, since our test case generates a complete pack, it reliably
+      demonstrates this particular bug and its fix. And we can't do better
+      without making the test racy.
+      
+      Signed-off-by: Jeff King <peff@peff.net>
+      Acked-by: Jonathan Tan <jonathantanmy@google.com>
+      Signed-off-by: Junio C Hamano <gitster@pobox.com>
+  
+* commit 873fa13e3fd7c2644578577f4274ce92ed891a42
+  Merge: 95c687bf85 11868978c7
+  Author: Junio C Hamano <gitster@pobox.com>
+  Date:   Mon Aug 17 17:02:43 2020 -0700
+  
+      Merge branch 'pd/mergetool-nvimdiff'
+      
+      The existing backends for "git mergetool" based on variants of vim
+      have been refactored and then support for "nvim" has been added.
+      
+      * pd/mergetool-nvimdiff:
+        mergetools: add support for nvimdiff (neovim) family
+
+exit code: 141
+
+   
+7. Location : Documents/RelNotes/  File name : 2.31.1.txt
+
+8. Local Branches :  
+	master
+	todo
+   Remote Branches:
+	remotes/origin/HEAD -> origin/master
+  	remotes/origin/jch
+  	remotes/origin/main
+  	remotes/origin/maint
+  	remotes/origin/master
+  	remotes/origin/next
+  	remotes/origin/seen
+  	remotes/origin/todo
+
+         
